@@ -1,7 +1,5 @@
 # /etc/udev/rules.d/local.rules 
 # /etc/udev/rules.d/89-local.rules
 # ADD rule: if we have a valid ID_FS_LABEL_ENC, and it's USB, mkdir and mount
-# ACTION=="add", RUN+="/lib/udev/hello.sh"
-#ACTION=="add", SUBSYSTEMS=="usb", RUN+="/lib/udev/hello.sh"
 ENV{ID_FS_LABEL_ENC}=="?*", ACTION=="add", KERNEL=="sd[b-z]?", SUBSYSTEMS=="usb", RUN+="/lib/udev/udev-automounter.sh %k"
 ACTION=="remove", KERNEL=="sd[b-z]?", SUBSYSTEMS=="usb", RUN+="/lib/udev/udev-unmounter.sh %k"

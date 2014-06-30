@@ -1,5 +1,5 @@
-# Automount USB device in /home/vam/intrahouse folder
-# Автоматическое монтирование usb устройства в домашнюю папку /homer/vam/intrahouse
+# Automount USB device in MOUNTDIR (/home/USERNAME/TARGEDDIR/) folder
+# Автоматическое монтирование usb устройства в домашнюю папку MOUNTDIR (/home/USERNAME/TARGEDDIR/)
 # version 0.1
 #
 # Для монтирования USB устройство должно иметь label (метку) photo (в любом регистре)

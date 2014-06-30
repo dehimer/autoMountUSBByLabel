@@ -7,20 +7,18 @@
 # type, creates /media/LABEL and mounts the partition.  Mount options
 # are hard-coded below.
 
-#eval echo ~$USER >> /home/vam/intrahouse/udev_test_log.txt
+MOUNTDIR="/home/USERNAME/TARGEDDIR/" #change on your path
 
 DEVICE=$1
-#echo "$DEVICE" > /home/vam/intrahouse/udev_test_log.txt
+
 # check input
 if [ -z "$DEVICE" ]; then
-   #echo NO DEVICE >> /home/vam/intrahouse/udev_test_log.txt
    exit 1
 fi
 
 # test that this device isn't already mounted
 device_is_mounted=`grep ${DEVICE} /etc/mtab`
 if [ -n "$device_is_mounted" ]; then
-   #echo "error: seems /dev/${DEVICE} is already mounted" >> /home/vam/intrahouse/udev_test_log.txt
    exit 1
 fi
 
@@ -50,38 +48,18 @@ eval `/sbin/blkid -o udev /dev/${DEVICE} | sed 's/^/export /; s/=/="/; s/$/"/'`
 echo "$ID_FS_LABEL" | tr '[:upper:]' '[:lower:]'
 export ID_FS_LABEL=$(echo "$ID_FS_LABEL" | tr '[:upper:]' '[:lower:]')
 
-#echo "test label $ID_FS_LABEL on equal to photo" >> /home/vam/intrahouse/udev_test_log.txt
-if [ "$ID_FS_LABEL" != "photo" ]; then
-    #echo NO PHOTO >> /home/vam/intrahouse/udev_test_log.txt
-    exit 1
-fi
-
 #export ID_FS_LABEL="USB13"
 
 if [ -z "$ID_FS_LABEL" ] || [ -z "$ID_FS_TYPE" ]; then
-   #echo "error: ID_FS_LABEL is empty! did blkid -o udev break? tried /dev/${DEVICE}" > /home/vam/intrahouse/udev_test_log.txt
    exit 1
 fi
-#echo "$ID_FS_LABEL" >> /home/vam/intrahouse/udev_test_log.txt
 
 # test mountpoint - it shouldn't exist
-if [ ! -e "/home/vam/intrahouse/${ID_FS_LABEL}" ]; then
+if [ ! -e "${MOUNTDIR}${ID_FS_LABEL}" ]; then
 
    # make the mountpoint
-   #echo "/home/vam/intrahouse/${ID_FS_LABEL} create" >> /home/vam/intrahouse/udev_test_log.txt
-   mkdir -m 777 "/home/vam/intrahouse/${ID_FS_LABEL}"
-   #echo "/home/vam/intrahouse/${ID_FS_LABEL} created" >> /home/vam/intrahouse/udev_test_log.txt
+   mkdir -m 777 "${MOUNTDIR}${ID_FS_LABEL}"
 fi
-
-# test mountpoint used
-#echo "TEST BUSY MOUNT_POINT /home/vam/intrahouse/${ID_FS_LABEL}"  >> /home/vam/intrahouse/udev_test_log.txt
-# MOUNT_POINT_BUSY = `mount | grep /home/vam/intrahouse/${ID_FS_LABEL}`
-#MOUNT_POINT_BUSY = `mount | grep /home/vam/intrahouse/${ID_FS_LABEL}`
-#echo "BUSY MOUNT_POINT: ${MOUNT_POINT_BUSY}"  >> /home/vam/intrahouse/udev_test_log.txt
-#if [ -т $MOUNT_POINT_BUSY ]; then
-#    echo $MOUNT_POINT_BUSY >> /home/vam/intrahouse/udev_test_log.txt
-#    exit 1
-#fi
 
 
 # mount the device
@@ -95,18 +73,17 @@ fi
 #      mount -t auto -o uid=1000,gid=1000 [...]
 # 
 #
-#echo "$ID_FS_TYPE" >> /home/vam/intrahouse/udev_test_log.txt 
 case "$ID_FS_TYPE" in
 
-vfat)  mount -t vfat -o sync,noatime,uid=1000 /dev/${DEVICE} "/home/vam/intrahouse/${ID_FS_LABEL}"
+vfat)  mount -t vfat -o sync,noatime,uid=1000 /dev/${DEVICE} "${MOUNTDIR}${ID_FS_LABEL}"
       ;;
 
       # I like the locale setting for ntfs
-ntfs)  mount -t auto -o sync,noatime,uid=1000,locale=en_US.UTF-8 /dev/${DEVICE} "/home/vam/intrahouse/${ID_FS_LABEL}"
+ntfs)  mount -t auto -o sync,noatime,uid=1000,locale=en_US.UTF-8 /dev/${DEVICE} "${MOUNTDIR}${ID_FS_LABEL}"
       ;;
 
       # ext2/3/4 don't like uid option
-ext*)  mount -t auto -o sync,noatime /dev/${DEVICE} "/home/vam/intrahouse/${ID_FS_LABEL}"
+ext*)  mount -t auto -o sync,noatime /dev/${DEVICE} "${MOUNTDIR}${ID_FS_LABEL}"
       ;;
 esac
 
