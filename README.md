@@ -1,9 +1,9 @@
-### Automount USB device in MOUNTDIR (/home/USERNAME/TARGEDDIR/) folder<br>
-### Автоматическое монтирование usb устройства в домашнюю папку MOUNTDIR (/home/USERNAME/TARGEDDIR/)<br>
-### version 0.1<br>
-### Папка - точка монтирования создается с названием label устройства в нижнем регистре.<br>
+Automount USB device in MOUNTDIR (/home/USERNAME/TARGEDDIR/) folder<br>
+Автоматическое монтирование usb устройства в домашнюю папку MOUNTDIR (/home/USERNAME/TARGEDDIR/)<br>
+version 0.1<br>
+Папка - точка монтирования создается с названием label устройства в нижнем регистре.<br>
 
-Порядок действий для добавления функции автомонтирования:<br>
+###Порядок действий для добавления функции автомонтирования:
 <br>
 1. Добавить новые правила в udev<br>
   1.1 Скопировать файл /etc/udev/rules.d/local.rules<br>
@@ -15,7 +15,7 @@
   2.4 Для каждого файла 2.1, 2.2, 2.3 дать права на возможность исполнения: sudo chmod +x <имя файла bash скрипта><br>
 <br>
 <br>
-###Назначение файлов:<br>
+###Назначение файлов:
 <br>
 /etc/udev/rules.d/local.rules - правила для udev, по которым он будет запускать bash скрипты при добавление/удаление устройства<br>
 /lib/udev/udev-automounter.sh - вызывается при добавление устройства. запускает скрипт монтирования /lib/udev/udev-auto-mount.sh<br>
@@ -23,7 +23,7 @@
 /lib/udev/udev-unmounter.sh   - отмонтирование устройства от точки монтировния
 <br>
 <br>
-###Приложение:<br>
+###Приложение:
 http://superuser.com/questions/53978/automatically-mount-external-drives-to-media-label-on-boot-without-a-user-logge<br>
 http://superuser.com/questions/31917/is-there-a-way-to-show-notification-from-bash-script-in-ubuntu<br>
 http://askubuntu.com/questions/297412/how-do-i-make-udev-rules-work<br>
