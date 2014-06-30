@@ -7,14 +7,14 @@
 
 Порядок действий для добавления функции автомонтирования:
 
-1. Добавить новые правила в udev\n
-  1.1 Скопировать файл /etc/udev/rules.d/local.rules
-  1.2 Перезапустить правила udev командой: sudo udevadm control --reload-rules
-2. Добавить файлы bash скриптов в /lib/udev/
-  2.1 Скопировать /lib/udev/udev-automounter.sh
-  2.2 Скопировать /lib/udev/udev-auto-mount.sh
-  2.3 Скопировать /lib/udev/udev-unmounter.sh
-  2.4 Для каждого файла 2.1, 2.2, 2.3 дать права на возможность исполнения: sudo chmod +x <имя файла bash скрипта>
+1. Добавить новые правила в udev<br>
+>1.1 Скопировать файл /etc/udev/rules.d/local.rules<br>
+>1.2 Перезапустить правила udev командой: sudo udevadm control --reload-rules<br>
+2. Добавить файлы bash скриптов в /lib/udev/<br>
+>2.1 Скопировать /lib/udev/udev-automounter.sh<br>
+>2.2 Скопировать /lib/udev/udev-auto-mount.sh<br>
+>2.3 Скопировать /lib/udev/udev-unmounter.sh<br>
+>2.4 Для каждого файла 2.1, 2.2, 2.3 дать права на возможность исполнения: sudo chmod +x <имя файла bash скрипта><br>
 
 
 Назначение файлов:
