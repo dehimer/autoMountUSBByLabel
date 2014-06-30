@@ -1,9 +1,7 @@
 ### Automount USB device in MOUNTDIR (/home/USERNAME/TARGEDDIR/) folder<br>
 ### Автоматическое монтирование usb устройства в домашнюю папку MOUNTDIR (/home/USERNAME/TARGEDDIR/)<br>
 ### version 0.1<br>
-#<br>
 ### Папка - точка монтирования создается с названием label устройства в нижнем регистре.<br>
-#<br>
 
 Порядок действий для добавления функции автомонтирования:<br>
 <br>
