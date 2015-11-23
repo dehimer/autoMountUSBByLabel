@@ -1,0 +1,2 @@
+ENV{ID_FS_LABEL_ENC}=="?*", ACTION=="add", SUBSYSTEMS=="usb", RUN+="/lib/udev/ihusb.sh %k add %b"
+ENV{ID_FS_LABEL_ENC}=="?*", ACTION=="remove", SUBSYSTEMS=="usb", RUN+="/lib/udev/ihusb.sh %k remove %b"
